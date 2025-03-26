@@ -6,6 +6,26 @@ const playerSchema = new Schema({
     required: true,
     unique: true
   },
+  age: {
+    ytpe: Number,
+    required: true
+  },
+  position: {
+    type: String,
+    required: true
+  },
+  height: {
+    type: Number,
+    required: true
+  },
+  attackReach: {
+    type: Number,
+    defaulte: 0
+  },
+  blockReach: {
+    type: Number,
+    default: 0
+  },
   attack: {
     type: Number,
     default: 0
@@ -14,7 +34,11 @@ const playerSchema = new Schema({
     type: Number,
     default: 0
   },
-  defense: {
+  serve: {
+    type: Number,
+    default: 0
+  },
+  setting: {
     type: Number,
     default: 0
   }
