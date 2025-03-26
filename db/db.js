@@ -3,10 +3,7 @@ const debugDB = require('debug')('voley-app:db')
 
 const db = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
+    const conn = await mongoose.connect(process.env.MONGODB_URI)
     debugDB(`Connected to ${conn.connection.name}`)
   } catch (err) {
     debugDB('Error connecting to the database', err)

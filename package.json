@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=voley-app:* nodemon app.js",
+    "dev": "DEBUG=voley-app:* nodemon server.js",
     "start": "node app.js"
   },
   "dependencies": {
