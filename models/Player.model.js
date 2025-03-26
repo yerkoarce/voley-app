@@ -6,6 +6,16 @@ const playerSchema = new Schema({
     required: true,
     unique: true
   },
+  teamId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Team',
+    required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    default: null
+  },
   age: {
     ytpe: Number,
     required: true
@@ -23,22 +33,6 @@ const playerSchema = new Schema({
     defaulte: 0
   },
   blockReach: {
-    type: Number,
-    default: 0
-  },
-  attack: {
-    type: Number,
-    default: 0
-  },
-  reception: {
-    type: Number,
-    default: 0
-  },
-  serve: {
-    type: Number,
-    default: 0
-  },
-  setting: {
     type: Number,
     default: 0
   }
