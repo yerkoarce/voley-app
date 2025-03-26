@@ -6,7 +6,7 @@ const teamSchema = new Schema({
     unique: true,
     required: true
   },
-  country: {
+  city: {
     type: String,
     required: true
   },
@@ -23,6 +23,10 @@ const teamSchema = new Schema({
     default: 0
   },
   attack: {
+    type: Number,
+    default: 0
+  },
+  serve: {
     type: Number,
     default: 0
   }
