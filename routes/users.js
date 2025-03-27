@@ -1,10 +1,29 @@
-var express = require('express');
-var router = express.Router();
-const { body, validationResult } = require('express-validator');
+const express = require('express')
+const router = express.Router()
+const User = require('../models/User.model')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/users', async (req, res, next) => {
+    try {
+        const users = await User.find({})
+        res.json(users)
+    } catch (error) {
+        next(error)
+    }
+})
 
-module.exports = router;
+router.get('/users/:id', async (req, res, next) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return next(createError(400, `Invalid user ID`))
+        }
+        
+        const user = await User.findById(req.params.id)
+        if (!user) {
+            return next(createError(404, `User with id ${req.params.id} not found`))
+        }
+
+        res.json(user)
+    } catch (error) {
+        next(error)
+    }
+})
