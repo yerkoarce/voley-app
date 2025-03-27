@@ -8,13 +8,13 @@ const statSchema = new Schema({
     negative: Number, 
     neutral: Number 
   },
-  ataques: { 
+  attacks: { 
     point: Number, 
     block: Number, 
     neutral: Number,
     error: Number 
   },
-  reception: {
+  receptions: {
     doublePositive: Number,
     positive: Number,
     negative: Number,
