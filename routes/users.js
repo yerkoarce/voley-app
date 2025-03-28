@@ -31,6 +31,28 @@ router.get('/users/:id', async (req, res, next) => {
     }
 })
 
+router.put('/users/:id', async (req, res, next) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return next(createError(400, `Invalid user ID`))
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { 
+            new: true,
+            runValidators: true
+        })
+
+        if (!updatedUser) {
+            return next(createError(404, 'User not found'))
+        }
+
+        res.json(updatedUser)
+
+    } catch (error) {
+        next(error)
+    }
+})
+
 router.post('/users', async (req, res, next) => {
     try {
         const validateData = userSchema.validateData(req.body)
