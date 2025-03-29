@@ -1,0 +1,12 @@
+### POST one user
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Yerko 2 con mas de 20 caracteres",
+  "username": "Yerko_2",
+  "password": "Contraseña123"
+}
+
+### 

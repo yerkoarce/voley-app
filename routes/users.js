@@ -4,6 +4,7 @@ const User = require('../models/User.model')
 const userSchema = require('../schemas/userSchema')
 const bcrypt = require('bcrypt')
 const createError = require('http-errors')
+const z = require('zod')
 
 router.get('/users', async (req, res, next) => {
     try {
@@ -55,13 +56,17 @@ router.put('/users/:id', async (req, res, next) => {
 
 router.post('/users', async (req, res, next) => {
     try {
-        const validateData = userSchema.validateData(req.body)
+        const validateData = userSchema.safeParse(req.body)
 
-        const passwordHash = await bcrypt.hash(validateData.password, 10)
+        if (!validateData.success) {
+            return next(createError(400, 'Validation failed', validateData.error.errors))
+        }
+
+        const passwordHash = await bcrypt.hash(validateData.data.password, 10)
 
         const user = await User.create({
-            name: validateData.name,
-            username: validateData.username,
+            name: validateData.data.name,
+            username: validateData.data.username,
             password: passwordHash
         })
 
@@ -69,8 +74,8 @@ router.post('/users', async (req, res, next) => {
 
         res.status(201).json({ Message: 'User created successfully', userId: user._id })
     } catch (error) {
-        if(error.errors) {
-            return next(createError(400, 'Bad request', error.errors)) // Errores de zod
+        if(error) {
+            return next(createError(400, 'Bad request', error)) // Errores de zod
         }
         return next(createError(500, 'Internal server error', error))
     }
