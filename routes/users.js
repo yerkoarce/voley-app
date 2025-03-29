@@ -39,6 +39,12 @@ router.put('/users/:id', async (req, res, next) => {
             return next(createError(400, `Invalid user ID`))
         }
 
+        const validateData = userSchema.safeParse(req.body)
+
+        if (!validateData.success) {
+            return next(createError(400, 'Validation failed', validateData.error.errors))
+        }
+
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { 
             new: true,
             runValidators: true

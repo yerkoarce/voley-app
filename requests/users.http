@@ -15,4 +15,12 @@ GET http://localhost:3000/users
 ### Get user by ID
 GET http://localhost:3000/users/67e7327672a2675c732722b3
 
-### 
+### PUT user
+PUT http://localhost:3000/users/67e7327672a2675c732722b3
+Content-Type: application/json
+
+{
+  "name": "Yerko 2",
+  "username": "Yerko123",
+  "password": "Contraseña123Nueva"
+}
