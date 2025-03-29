@@ -10,3 +10,5 @@ const playerSchema = z.object({
   attackReach: z.number().min(250, {message: "Must be at least 250 cm"}),
   blockReach: z.number().min(243, {message: "Must be at least 243 cm"})
 })
+
+module.exports = playerSchema
